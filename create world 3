@@ -33,7 +33,7 @@ for(i=0;i<size;i++){
 void PutNumbers(char world[][20],int x,int y,int size){
 int i,j,k,a;
 if(x>y) a=x;
-else a=y;
+else a=y; // inja dorost nist bayad avaz she
 for(k=1;;k<=a){
 for(i=-k;i<=k;i++){
     for(j=-k;j<=k;j++){
