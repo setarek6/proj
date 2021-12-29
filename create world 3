@@ -1,0 +1,28 @@
+void CreateWorld3(int world2[][20],int x,int y,int size){
+int i,j,a,b,c;
+//a=world2[x][y];
+//for(i=-1;i<=1;i++){
+//    for(j=-1;j<=1;j++){
+//        if(world2[x+i][y+j]==a-1) {
+//            world3[x+i][y+j]=a;
+//           CreateWorld3(world2,x+i,y+j,size);
+//        }
+//    }
+//}
+for(i=0;i<size;i++){
+    for(j=0;j<size;j++){
+        a=world2[i][j];
+        for(b=-1;b<=1;b++){
+            for(c=-1;c<=1;c++){
+                if(world2[i+b][j+c]==a-1) {
+                    world3[i+b][j+c]=a;
+                }
+            }
+        }
+
+    }
+}
+
+
+
+}
