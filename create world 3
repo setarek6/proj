@@ -1,3 +1,6 @@
+#include <stdio.h>
+int world2[20][20];
+int world3[20][20];
 void CreateWorld3(int world2[][20],int x,int y,int size){
 int i,j,a,b,c;
 //a=world2[x][y];
