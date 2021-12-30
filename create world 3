@@ -27,7 +27,6 @@ for(i=0;i<size;i++){
 }
 
 
-
 }
 
 void PutNumbers(char world[][20],int x,int y,int size){
