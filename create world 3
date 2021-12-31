@@ -21,15 +21,23 @@ for(i=-1;i<=1;i++){
 }
 
 }
-void SingleMoveWithWorld3(int world3[][20],int x,int y,int movementsNum){
-int i,j,cur=world3[x][y];
+int MoveWithWorld3(int world3[][20],int x,int y,int xH,int yH,int movementsNum){
+int i,j,cur=world3[x][y],counter=0;
+while(counter<movementsNum){
 for(i=-1;i<=1;i++){
     for(j=-1;j<=1;j++){
         if(world3[x+i][y+i]==cur-1){
             world[x+i][y+j]=world[x][y];
+            cur=world3[x+i][y+j];
+            counter++;
+            if(world[x+i][y+i]=='H') return(1);
             // mokhtasate jadid ro mibarim tuye araye coordinate
         }
     }
+}
+}
+// mokhtasate jadide heyvoon ro mibarim tuye araye coordinate
+return(0);
 }
 
 
