@@ -21,7 +21,7 @@ for(i=-1;i<=1;i++){
 }
 
 }
-int MoveWithWorld3(int world3[][20],int x,int y,int xH,int yH,int movementsNum){
+int MoveWithWorld3(int world3[][20],int x,int y,int movementsNum){
 int i,j,cur=world3[x][y],counter=0;
 while(counter<movementsNum){
 for(i=-1;i<=1;i++){
