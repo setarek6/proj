@@ -1,3 +1,111 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <Windows.h>
+#include <string.h>
+#include "functions_phase-1.c"
+int g;
+int main()
+{
+   for(int i = 0; i <20; i++){
+      for(int j = 0; j < 20; j++){
+         world[i][j] = '.';
+      }
+   }
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+printf("Hello player,welcome to the game!\nBefore we start choose how you want to play.\nPress 1 if you want to resume your previous game.\nPress 2 if you want to start a new game with your own map.\nPress 3 if you want to start a new game with a random map.\nEnter here:");
+scanf("%d",g);
+if(g==1){
+    ResumeTheGame()
+    printf("Your kind is %c.You already know how to play so let's start!\nPress 5 if you are ready:",User_Animal)
+	scanf("%d", &user_move);
+	if(user_move != 5){
+		printf("see you later");
+		exit(0);
+	}
+	system("cls");
+}
+else if(g==2){ NewGame()}
+else{ NewRandomGame()}
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
+	int sw = 1;
+
+   while(1){
+   	print();
+      for(int i = 0; i < user_animals_index; i++){
+         for(int k = 0; k < user_animals[i].movement_number; k++){
+            do{
+            if(!sw)printf("\a");
+            printf("choose your momve : ");
+            scanf("%d", &user_move);
+            sw = single_move(user_move + '0', &user_animals[i].row, &user_animals[i].column);
+            }while(!sw);
+            system("cls");
+            print();
+         }
+      }
+      Sleep(2000);
+      system("cls");
+      for(int i = 0; i < program_animals_index; i++){
+         CreateWorldCopy();
+         counter = 0;
+         lastmojaveindex = 0;
+         currentmojaverindex = 0;
+         FindWay(program_animals[i].row, program_animals[i].column, &program_animals[i].row, &program_animals[i].column, 'f');
+         CreateWorldCopy();
+         integer_world_copy[hx][hy] = 1;
+         counter = 0;
+         lastmojaveindex = 0;
+         currentmojaverindex = 0;
+         FindWay(hx, hy, &program_animals[i].row, &program_animals[i].column, 'g');
+
+         for(int i = 0; i < side; i++){
+        for(int j = 0; j < side; j++){
+            world3[i][j] = 0;
+            }
+        }
+
+       /* print();
+
+        printf("in avaleshe \n");
+    for(int k = 0; k < side; k++){
+        for(int  t = 0; t < side; t ++){
+            printf("%d ", world3[k][t]);
+        }
+        printf("\n");
+    }
+         CreateWorld3(program_animals[i].row, program_animals[i].column);
+
+
+         printf("for animal in %d %d\n", program_animals[i].row, program_animals[i].column);
+         for(int i = 0 ; i < side; i++){
+       for(int j = 0; j < side; j++){
+          printf("%d ", integer_world_copy[i][j]);
+       }
+       printf("\n");
+    }
+
+    printf("-------------------------------------\n");*/
+        CreateWorld3(program_animals[i].row, program_animals[i].column);
+       /* for(int i = 0 ; i < side; i++){
+       for(int j = 0; j < side; j++){
+          printf("%d ", world3[i][j]);
+       }
+       printf("\n");
+      }
+    Sleep(10000);*/
+         for(int k = 0; k < program_animals[i].movement_number; k++){
+            int move_result = Move(&program_animals[i].row, &program_animals[i].column);
+            print();
+            Sleep(2000);
+            system("cls");
+         }
+      }
+   }
+   return 0;
+}
+
+
+
 void SaveTheGame(){
 FILE *savedgame;
 int i,j;
