@@ -1,0 +1,299 @@
+void SaveTheGame(){
+FILE *savedgame;
+int i,j;
+fopen("savedgame.txt","w");
+for(i = 0; i < side; i++){
+    for(j = 0; j < side; j++){
+        if(world[i][j]=='H' || world[i][j]=='#'){
+        fprintf(savedgame,"%c ", world[i][j]);
+        fprintf(savedgame,"%d %d ",i,j);
+        }
+    }
+    
+}
+fprintf(savedgame,"\n");
+for(i=0;i<program_animals_index;i++){
+    fprintf(savedgame,"%c ",world[program_animal[i].row],program_animal[i].column]);
+    fprintf(savedgame,"%d %d %d %d %d %d %d",program_animal[i].row,program_animal[i].column,program_animal[i].energy,program_animals[i].single_move_energy,
+            program_animals[i].movement_number, program_animals[i].reproduction_energy
+            , program_animals[i].attack_energy, program_animals[i].defense_energy);
+    fprintf(savedgame,"\n");
+}
+fclose(savedgame);
+for(int i = 0; i < program_animals_index; i++){
+      if(world[program_animals[i].row][program_animals[i].column] == User_Animal){
+         TransferToUserAnimals(i);
+         i--;
+      }
+   }
+
+printf("You already know how to play so let's get started!\nYour type is %c.\nIf you are ready press number 5 : ", User_Animal);
+	scanf("%d", &user_move);
+	if(user_move != 5){
+		printf("see you later");
+		exit(0);
+	}
+
+	system("cls");
+}
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+void ResumeTheGame(){
+char c;
+int i=0,row,column,energy,movement_number,reproduction_energy,attack_energy,defense_energy;
+savedgame=fopen("savedgame.txt","r");
+do{
+    fscanf(savedgame,"%c ", c);
+    fscanf(savedgame,"%d %d ",row,column);
+    world[row][column]=c;
+     
+}while(c=='H'||c=='#');
+while(!feof(savedgame)){
+    fscanf(savedgame,"%c ", c);
+    fscanf(savedgame,"%d %d %d %d %d %d %d",program_animal[i].row,program_animal[i].column,program_animal[i].energy,program_animals[i].single_move_energy,
+    program_animals[i].movement_number, program_animals[i].reproduction_energy
+    ,program_animals[i].attack_energy, program_animals[i].defense_energy);
+    world[program_animal[i].row][program_animal[i].column]=c;
+    i++;
+}
+fclose(savedgame);
+}
+int random(int min, int max){
+int a=max-min;
+int b=(rand())%a;
+return(min+b);
+}
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+void NewRandomGame(){
+    /* #########################################   GEREFTAN DATA AZ RANDOM MAP  ##########################################*/
+   char User_Animal;
+   int seprator_counter = 0, index_for_add_genetic = 0, user_move = 0; // user move harkat karbaro migire
+   FILE * randomgame = fopen("randomgame.txt", "r");
+   fscanf(randomgame, "%d", &side);
+   char temp[100];
+
+   while(fscanf(randomgame, "%s", temp) != EOF){
+      if(temp[0] == 'F'){
+         int food_energy, row, col;
+         fscanf(randomgame, "%d", &food_energy);
+         fscanf(randomgame, "%s", temp);
+         row = find_integer(temp);
+         col = find_integer(temp);
+         energys[row][col] += food_energy;
+      }
+
+      else if(temp[0] == '#'){
+         int number, row, col;
+         fscanf(randomgame, "%d", &number);
+         fscanf(randomgame, "%s", temp);
+
+         for(int k = 0; k < number; k++){
+            row = find_integer(temp);
+            col = find_integer(temp);
+            world[row][col] = '#';
+         }
+      }
+
+      else if(temp[0] == 'H'){
+         int number, row, col;
+         fscanf(randomgame, "%d", &number);
+         fscanf(randomgame, "%s", temp);
+
+         for(int k = 0; k < number; k++){
+            row = find_integer(temp);
+            col = find_integer(temp);
+            world[row][col] = 'H';
+         }
+      }
+
+      else if(is_equal_str(temp, "===")){
+         seprator_counter++;
+      }
+
+      else{
+         int number, row, col;
+
+         if(seprator_counter == 4){
+            char animal = temp[0];
+            int current_energy;
+            fscanf(randomgame, "%d", &program_animals[index_for_add_genetic].energy);
+            fscanf(randomgame, "%d$%d$%d$%d$%d", &program_animals[index_for_add_genetic].single_move_energy,
+            &program_animals[index_for_add_genetic].movement_number, &program_animals[index_for_add_genetic].reproduction_energy
+            , &program_animals[index_for_add_genetic].attack_energy, &program_animals[index_for_add_genetic].defense_energy);
+
+            index_for_add_genetic++;
+
+            for( ; world[program_animals[index_for_add_genetic].row][program_animals[index_for_add_genetic].column] == animal; index_for_add_genetic++){
+               program_animals[index_for_add_genetic].energy = program_animals[index_for_add_genetic - 1].energy;
+               program_animals[index_for_add_genetic].movement_number = program_animals[index_for_add_genetic - 1].movement_number;
+               program_animals[index_for_add_genetic].reproduction_energy = program_animals[index_for_add_genetic - 1].reproduction_energy;
+               program_animals[index_for_add_genetic].single_move_energy = program_animals[index_for_add_genetic - 1].single_move_energy;
+               program_animals[index_for_add_genetic].attack_energy = program_animals[index_for_add_genetic - 1].attack_energy;
+               program_animals[index_for_add_genetic].defense_energy = program_animals[index_for_add_genetic - 1].defense_energy;
+            }
+         }
+
+         else if(seprator_counter == 3){
+               User_Animal = temp[0];
+         }
+
+         else{
+            char animal = temp[0];
+            fscanf(randomgame, "%d", &number);
+            fscanf(randomgame, "%s", temp);
+            for(int i = 0; i < number; i++){
+               row = find_integer(temp);
+               col = find_integer(temp);
+               world[row][col] = animal;
+               program_animals[program_animals_index].row = row;
+               program_animals[program_animals_index].column = col;
+               program_animals_index++;
+
+            }
+         }
+
+      }
+   }
+   fclose(randomgame);
+
+
+/* #########################################   JODA KARDAN GONE HAYE KARBAR   ##########################################*/
+
+   for(int i = 0; i < program_animals_index; i++){
+      if(world[program_animals[i].row][program_animals[i].column] == User_Animal){
+         TransferToUserAnimals(i);
+         i--;
+      }
+   }
+
+// /* ##################################################   SHORO BAZI   ##################################################*/
+
+   printf("Hello player\nWelcome to our game\nHere's how the game works.\nYou can choose your move based on this\n1 2 3\n\
+4 5 6\n7 8 9\nConsider 5 as yout current location and choose your move.\nyour type is %c.\nif you are ready press number 5 : ", User_Animal);
+
+	scanf("%d", &user_move);
+	if(user_move != 5){
+		printf("see you later");
+		exit(0);
+	}
+
+	system("cls");
+}
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+void NewGame(){
+
+    /* #########################################   GEREFTAN DATA AZ MAP  ##########################################*/
+   char User_Animal;
+   int seprator_counter = 0, index_for_add_genetic = 0, user_move = 0; // user move harkat karbaro migire
+   FILE * inputs = fopen("map-phase1.txt", "r");
+   fscanf(inputs, "%d", &side);
+   char temp[100];
+
+   while(fscanf(inputs, "%s", temp) != EOF){
+      if(temp[0] == 'F'){
+         int food_energy, row, col;
+         fscanf(inputs, "%d", &food_energy);
+         fscanf(inputs, "%s", temp);
+         row = find_integer(temp);
+         col = find_integer(temp);
+         energys[row][col] += food_energy;
+      }
+
+      else if(temp[0] == '#'){
+         int number, row, col;
+         fscanf(inputs, "%d", &number);
+         fscanf(inputs, "%s", temp);
+
+         for(int k = 0; k < number; k++){
+            row = find_integer(temp);
+            col = find_integer(temp);
+            world[row][col] = '#';
+         }
+      }
+
+      else if(temp[0] == 'H'){
+         int number, row, col;
+         fscanf(inputs, "%d", &number);
+         fscanf(inputs, "%s", temp);
+
+         for(int k = 0; k < number; k++){
+            row = find_integer(temp);
+            col = find_integer(temp);
+            world[row][col] = 'H';
+         }
+      }
+
+      else if(is_equal_str(temp, "===")){
+         seprator_counter++;
+      }
+
+      else{
+         int number, row, col;
+
+         if(seprator_counter == 4){
+            char animal = temp[0];
+            int current_energy;
+            fscanf(inputs, "%d", &program_animals[index_for_add_genetic].energy);
+            fscanf(inputs, "%d$%d$%d$%d$%d", &program_animals[index_for_add_genetic].single_move_energy,
+            &program_animals[index_for_add_genetic].movement_number, &program_animals[index_for_add_genetic].reproduction_energy
+            , &program_animals[index_for_add_genetic].attack_energy, &program_animals[index_for_add_genetic].defense_energy);
+
+            index_for_add_genetic++;
+
+            for( ; world[program_animals[index_for_add_genetic].row][program_animals[index_for_add_genetic].column] == animal; index_for_add_genetic++){
+               program_animals[index_for_add_genetic].energy = program_animals[index_for_add_genetic - 1].energy;
+               program_animals[index_for_add_genetic].movement_number = program_animals[index_for_add_genetic - 1].movement_number;
+               program_animals[index_for_add_genetic].reproduction_energy = program_animals[index_for_add_genetic - 1].reproduction_energy;
+               program_animals[index_for_add_genetic].single_move_energy = program_animals[index_for_add_genetic - 1].single_move_energy;
+               program_animals[index_for_add_genetic].attack_energy = program_animals[index_for_add_genetic - 1].attack_energy;
+               program_animals[index_for_add_genetic].defense_energy = program_animals[index_for_add_genetic - 1].defense_energy;
+            }
+         }
+
+         else if(seprator_counter == 3){
+               User_Animal = temp[0];
+         }
+
+         else{
+            char animal = temp[0];
+            fscanf(inputs, "%d", &number);
+            fscanf(inputs, "%s", temp);
+            for(int i = 0; i < number; i++){
+               row = find_integer(temp);
+               col = find_integer(temp);
+               world[row][col] = animal;
+               program_animals[program_animals_index].row = row;
+               program_animals[program_animals_index].column = col;
+               program_animals_index++;
+
+            }
+         }
+
+      }
+   }
+   fclose(inputs);
+
+
+
+/* #########################################   JODA KARDAN GONE HAYE KARBAR   ##########################################*/
+
+   for(int i = 0; i < program_animals_index; i++){
+      if(world[program_animals[i].row][program_animals[i].column] == User_Animal){
+         TransferToUserAnimals(i);
+         i--;
+      }
+   }
+
+// /* ##################################################   SHORO BAZI   ##################################################*/
+
+   printf("Hello player\nWelcome to our game\nHere's how the game works.\nYou can choose your move based on this\n1 2 3\n\
+4 5 6\n7 8 9\nConsider 5 as yout current location and choose your move.\nyour type is %c.\nif you are ready press number 5 : ", User_Animal);
+
+	scanf("%d", &user_move);
+	if(user_move != 5){
+		printf("see you later");
+		exit(0);
+	}
+
+	system("cls");
+}
