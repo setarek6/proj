@@ -57,3 +57,46 @@ for(i=-k;i<=k;i++){
 }
 world2[x][y]=0;
 }
+void SaveTheGame(){
+FILE *savedgame;
+int i,j;
+fopen("savedgame.txt","w");
+for(i = 0; i < side; i++){
+    for(j = 0; j < side; j++){
+        if(world[i][j]=='H' || world[i][j]=='#'){
+        fprintf(savedgame,"%c ", world[i][j]);
+        fprintf(savedgame,"%d %d ",i,j);
+        }
+    }
+    
+}
+fprintf(savedgame,"\n");
+for(i=0;i<program_animals_index;i++){
+    fprintf(savedgame,"%c ",world[program_animal[i].row],program_animal[i].column]);
+    fprintf(savedgame,"%d %d %d %d %d %d %d",program_animal[i].row,program_animal[i].column,program_animal[i].energy,program_animals[i].single_move_energy,
+            program_animals[i].movement_number, program_animals[i].reproduction_energy
+            , program_animals[i].attack_energy, program_animals[i].defense_energy);
+    fprintf(savedgame,"\n");
+}
+fclose(savedgame);
+}
+void ResumeTheGame(){
+char c;
+int i=0,row,column,energy,movement_number,reproduction_energy,attack_energy,defense_energy;
+savedgame=fopen("savedgame.txt","r");
+do{
+    fscanf(savedgame,"%c ", c);
+    fscanf(savedgame,"%d %d ",row,column);
+    world[row][column]=c;
+     
+}while(c=='H'||c=='#');
+while(!feof(savedgame)){
+    fscanf(savedgame,"%c ", c);
+    fscanf(savedgame,"%d %d %d %d %d %d %d",program_animal[i].row,program_animal[i].column,program_animal[i].energy,program_animals[i].single_move_energy,
+    program_animals[i].movement_number, program_animals[i].reproduction_energy
+    ,program_animals[i].attack_energy, program_animals[i].defense_energy);
+    world[program_animal[i].row][program_animal[i].column]=c;
+    i++;
+}
+fclose(savedgame);
+}
