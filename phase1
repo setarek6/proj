@@ -405,3 +405,95 @@ void NewGame(){
 
 	system("cls");
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   RANDOM MAP
+
+char Rworld[20][20];
+char ALPH="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//hame Rworld ro mizarim '.' 
+int isFree(int x,int y){
+   if (Rworld[x][y]=='.') return(1);
+   else return(0);
+}
+void RandomGame(){
+int i,x,y,j,animal_counter,k,sw;
+    FILE *randomgame = fopen("randomgame.txt","w");
+    //srand(time (0));
+    int side = random(0,20);
+    //char animals[10];
+    fprintf (randomgame,"%d\n",side);
+    fprintf (randomgame,"# ");
+    int deadends = random(0,side*side/5);
+    fprintf (randomgame,"%d ", deadends);
+    for (i=0 ; i < deadends ; i++){
+      do{
+      x=random(0,side);
+      y=random(0,side);
+      }while(isFree(x,y)==0); 
+        fprintf (randomgame,"(%d,%d)", x, y);
+        Rworld[x][y]='#';
+    }
+    fprintf (randomgame,"\n");
+    fprintf (randomgame,"H ");
+    int heavens= random(0,side*side/5);
+    fprintf (randomgame,"%d ",heavens);
+    for ( i=0; i <heavens; i++){
+      do{
+      x=random(0,side);
+      y=random(0,side);
+      }while(isFree(x,y)==0); 
+        fprintf (randomgame,"(%d,%d)", x,y);
+        Rworld[x][y]='H';
+    }
+    fprintf (randomgame,"\n");
+    fprintf (randomgame,"===\n");
+    int foods = ///baze?
+    for (i=0;i<foods;i++){
+      fprintf (randomgame,"F ");
+      fprintf (randomgame,"%d ",rand()%500+0);//baze?
+      do{
+      x=random(0,side);
+      y=random(0,side);
+      }while(isFree(x,y)==0); 
+        fprintf (randomgame,"(%d,%d)\n",x,y));
+        // food ham age bashe nemishe heyvoon bere?
+        //Rworld[x][y]='F';
+   }
+    fprintf(randomgame,"===\n");
+   int animals= random(1,26);
+   char animals[26];
+   int user_animal_number=random(0,animals);
+   for(animal_counter=0;animal_counter<animals;animal_counter++){
+   sw=0;
+   animals[animal_counter]=ALPH[random(0,26)];
+   for(k=0;animals[k];k++){
+      if(animals[k]==animals[animal_counter]) animal_counter--;
+   }    
+   }
+   k=0;
+    for (i=0;i<animals;i++){
+        fprintf (randomgame,"%c ",animals[i]);
+        int single_animal = random(1,side*side/5);
+        fprintf (randomgame,"%d ",single_animal);
+        for (j=0;j<single_animal;j++){
+      do{
+      x=random(0,side);
+      y=random(0,side);
+      findway(x,y,hx,hy,f);
+      }while(isFree(x,y)==0&&hy!=0&&hy!=0); 
+            fprintf (randomgame,"(%d,%d)",x,y);
+            Rworld[x][y]='ALPH[k]';
+        }
+        fprintf (randomgame,"\n");
+        k++;
+    }
+    fprintf (randomgame,"===\n");
+    fprintf (randomgame,"%c\n", animals[user_animal_number]);
+    fprintf (randomgame,"===\n");
+    for (i=0;i<animals;i++){
+        fprintf (randomgame,"%c ",animals[i]);
+        fprintf (randomgame,"%d ",random());//baze?
+        fprintf (randomgame,"%d$%d$%d$%d$%d\n",random(20,200),random(1,3),random(60,600),random(20,500),random(20,500));//baze??
+    }
+    fclose (randomgame);
+
+}
