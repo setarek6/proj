@@ -147,7 +147,7 @@ printf("You already know how to play so let's get started!\nYour type is %c.\nIf
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 void ResumeTheGame(){
 char c;
-int i=0,row,column,energy,movement_number,reproduction_energy,attack_energy,defense_energy;
+int i=0,row,column;
 savedgame=fopen("savedgame.txt","r");
 do{
     fscanf(savedgame,"%c ", c);
