@@ -150,16 +150,16 @@ char c;
 int i=0,row,column;
 savedgame=fopen("savedgame.txt","r");
 do{
-    fscanf(savedgame,"%c ", c);
-    fscanf(savedgame,"%d %d ",row,column);
+    fscanf(savedgame,"%c ", &c);
+    fscanf(savedgame,"%d %d ",&row,&column);
     world[row][column]=c;
      
 }while(c=='H'||c=='#');
 while(!feof(savedgame)){
-    fscanf(savedgame,"%c ", c);
-    fscanf(savedgame,"%d %d %d %d %d %d %d",program_animal[i].row,program_animal[i].column,program_animal[i].energy,program_animals[i].single_move_energy,
-    program_animals[i].movement_number, program_animals[i].reproduction_energy
-    ,program_animals[i].attack_energy, program_animals[i].defense_energy);
+    fscanf(savedgame,"%c ", &c);
+    fscanf(savedgame,"%d %d %d %d %d %d %d",&program_animal[i].row,&program_animal[i].column,&program_animal[i].energy,&program_animals[i].single_move_energy,
+    &program_animals[i].movement_number, &program_animals[i].reproduction_energy
+    ,&program_animals[i].attack_energy, &program_animals[i].defense_energy);
     world[program_animal[i].row][program_animal[i].column]=c;
     i++;
 }
