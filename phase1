@@ -406,6 +406,11 @@ void NewGame(){
 	system("cls");
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   RANDOM MAP
+int random(int min, int max){
+int a=max-min;
+int b=(rand())%a;
+return(min+b);
+}
 
 char Rworld[20][20];
 char ALPH="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
