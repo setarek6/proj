@@ -486,7 +486,7 @@ int i,x,y,j,animal_counter,k,sw;
       findway(x,y,hx,hy,f);
       }while(isFree(x,y)==0&&hy!=0&&hy!=0); 
             fprintf (randomgame,"(%d,%d)",x,y);
-            Rworld[x][y]='ALPH[k]';
+            Rworld[x][y]=ALPH[k];
         }
         fprintf (randomgame,"\n");
         k++;
