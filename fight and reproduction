@@ -1,0 +1,44 @@
+int a,b,f=0,r,c,attacker,attackerR,attackerC;
+void fight(){
+for(a=-1;a<=1;a++){
+    for(b=-1;b<=1;b++){
+        if(word[program_animals[i].row][program_animals[i].column]!=world[program_animals[i].row+a][program_animals[i].column+b]&&random(0,1)==1) {
+            f=1;
+            r=program_animals[i].row+a;
+            c=program_animals[i].column+b;
+            attacker=random(1,2);
+            if(attacker==1){
+                attackerR=program_animals[i].row;
+                attackerC=program_animals[i].column;
+            }
+            else{
+                attackerR=program_animals[i].row+a;
+                attackerC=program_animals[i].column+b;
+
+            }
+        }
+    }
+} 
+if(f==1){
+    program_animals[i].energy=program_animals[i].energy-(program_animals[i].single_move_energy*3)
+    //harkdum attack enery bishtari dasht mibare
+    //lose() baraye heyvuni ke mord
+}
+}
+int giveEnergy(){
+    if(random(0,1)==1){
+        for(a=-1;a<=1;a++){
+            for(b=-1;b<=1;b++){
+                if(word[program_animals[i].row][program_animals[i].column]==world[program_animals[i].row+a][program_animals[i].column+b]){
+                    //single_move_energy be energye heyvune mojaver ezafe mishe
+                    return(1);
+                }
+             
+            }
+        }
+
+    }
+    return(0);
+}
+//tuye main:if(giveEnergy==0) move()
+#######################################################
