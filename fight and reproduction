@@ -42,3 +42,73 @@ int giveEnergy(){
 }
 //tuye main:if(giveEnergy==0) move()
 #######################################################
+void reproduction(char mode){ //mode ya u ya p(user animal, program animal)
+int i,j,r,c,sw=0;
+if(mode=='u'){
+int x=user_animals[].animal_coordinate.row;
+int y=user_animals[].animal_coordinate.column;
+for(i=-1;i<=1;i++){
+   for(j=-1;j<=1;j++){
+      if(user_animals[]==world[x+i][y+j]&&sharte energy barghrar&&random(0,1)==1) sw=1;
+      break;
+   }
+}
+if(sw==1){
+new() //hafeze jadid
+user_index++;
+user_animal[].animal_energy=user_animal[].animal_energy-user_animal[].reproduction_energy/2;
+//kam shdn az energye valede 2
+new.energy= //in ghesmat ham ba mode byad joda beshe?
+new.single_move_energy=random(20,200);
+new.movment_number=random(1,3);
+new.reproduction_energy=random(60,600);
+new.attack_energy=random(20,500);
+new.defense_energy=random(20,500)
+}
+do{
+int k=1; 
+r=x+random(-k,k);
+c=y+random(-k,k);
+k++;
+}while(world[r][c]!='.');
+new.coordinate.row=r;
+new.coordinate.column=c;
+}
+else{ 
+int x=program_animals[].animal_coordinate.row;
+int y=program_animals[].animal_coordinate.column;
+for(i=-1;i<=1;i++){
+   for(j=-1;j<=1;j++){
+      if(program_animals[]==world[x+i][y+j]&&sharte energy barghrar&&random(0,1)==1) sw=1;
+      break;
+   }
+}
+if(sw==1){
+new() 
+program_index++;
+program_animal[].animal_energy=program_animal[].animal_energy-program_animal[].reproduction_energy/2;
+//kam shdn az energye valede 2
+new.energy= 
+new.single_move_energy=random(20,200);
+new.movment_number=random(1,3);
+new.reproduction_energy=random(60,600);
+new.attack_energy=random(20,500);
+new.defense_energy=random(20,500)
+}
+do{
+int k=1; 
+r=x+random(-k,k);
+c=y+random(-k,k);
+k++;
+}while(world[r][c]!='.');
+new.coordinate.row=r;
+new.coordinate.column=c;
+}
+}
+
+
+
+
+
+//////tuye main baad az harkate har heyvun
+
