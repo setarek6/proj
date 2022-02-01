@@ -54,7 +54,7 @@ y=program_animals[i].column;
 
 ######################################################################################################################
 
-int isAnyAnimal(int c, int r.char mode){
+int isAnyAnimal(int c, int r,char mode){
 int i;
 if(mode=='p'){
 for(i=0 ; i< program_animals_index ; i++){
