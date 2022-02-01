@@ -91,7 +91,7 @@ if(mode=='u'){
 if(user_animals[i].energy<user_animals[i].reproduction_energy) return();
 int x=user_animals[i].animal_coordinate.row;
 int y=user_animals[i].animal_coordinate.column;
-kind=word[x][y];
+kind=world[x][y];
 for(a=-1;a<=1;a++){
    for(b=-1;b<=1;b++){                       
       if(user_animals[i]==world[x+a][y+b]){
@@ -126,7 +126,7 @@ else{
 if(program_animals[i].energy<program_animals[i].reproduction_energy) return();
 int x=program_animals[i].animal_coordinate.row;
 int y=program_animals[i].animal_coordinate.column;
-kind=word[x][y];
+kind=world[x][y];
 for(a=-1;a<=1;a++){
    for(b=-1;b<=1;b++){
         if(program_animals[i]==world[x+a][y+b]){
