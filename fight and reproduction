@@ -64,14 +64,28 @@ else{
 }
 return(-1);   
 }
-
+int findPrimaryInfo(int kind,char mode){
+int i;
+if(mode=='e'){
+for(i=0; ;i++){
+    if(primary_info[i][0]==kind) return(primary_info[i][2]);
+}    
+}
+else{
+    for(i=0; ;i++){
+    if(primary_info[i][0]==kind) return(primary_info[i][1]);
+} 
+}
+return(-1);
+}
 void reproduction(char mode){ 
-int i,j,r,c,sw=0,a,b,index; //sw byad avale tabe sefr beshe
+int i,j,r,c,sw=0,a,b,index,kind; //sw byad avale tabe sefr beshe
 if(random(0,1)==0)  return();
 if(mode=='u'){
 if(user_animals[i].energy<user_animals[i].reproduction_energy) return();
 int x=user_animals[i].animal_coordinate.row;
 int y=user_animals[i].animal_coordinate.column;
+kind=word[x][y];
 for(a=-1;a<=1;a++){
    for(b=-1;b<=1;b++){                       
       if(user_animals[i]==world[x+a][y+b]){
@@ -85,7 +99,7 @@ for(a=-1;a<=1;a++){
 if(sw==1){
 user_animals[i].animal_energy=user_animals[i].animal_energy-user_animals[i].reproduction_energy/2;
 user_animals[index].animal_energy=user_animals[index].animal_energy-user_animals[index].reproduction_energy/2;
-user_animals[user_animals_index].energy=?? //in ghesmat ham ba mode byad joda beshe?
+user_animals[user_animals_index].energy=findPrimaryInfo(kind,'e');
 user_animals[user_animals_index].single_move_energy=random(20,200);
 user_animals[user_animals_index].movment_number=random(1,3);
 user_animals[user_animals_index].reproduction_energy=random(60,600);
@@ -106,6 +120,7 @@ else{
 if(program_animals[i].energy<program_animals[i].reproduction_energy) return();
 int x=program_animals[i].animal_coordinate.row;
 int y=program_animals[i].animal_coordinate.column;
+kind=word[x][y];
 for(a=-1;a<=1;a++){
    for(b=-1;b<=1;b++){
         if(program_animals[i]==world[x+a][y+b]){
@@ -119,7 +134,7 @@ for(a=-1;a<=1;a++){
 if(sw==1){
 program_animal[i].animal_energy=program_animal[i].animal_energy-program_animal[i].reproduction_energy/2;
 program_animals[index].animal_energy=program_animals[index].animal_energy-program_animals[index].reproduction_energy/2;
-program_animals[program_animals_index].energy=???
+program_animals[program_animals_index].energy=findPrimaryInfo(kind,'e');
 program_animals[program_animals_index].single_move_energy=random(20,200);
 program_animals[program_animals_index].movment_number=random(1,3);
 program_animals[program_animals_index].reproduction_energy=random(60,600);
