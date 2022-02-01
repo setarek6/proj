@@ -1,4 +1,4 @@
-int a,b,f=0,r,c,attacker,attackerR,attackerC,attacker_index,attacker_wins,defender_index;
+int a,b,f=0,r,c,attacker,attackerR,attackerC,attacker_index,attacker_wins,defender_index,defenderR,defenderC;
 char winner;  //a,d
 void fight(){
 if(random(0,1)==0) return();
@@ -13,12 +13,16 @@ for(a=-1;a<=1;a++){
                 attackerC=program_animals[i].column;
                 attacker_index=i;
                 defender_index=isAnyAnimal(attackerR,attackerC,'p');
+                defenderR=program_animals[i].row+a;
+                defenderC=program_animals[i].column+b;
             }
             else{
                 attackerR=program_animals[i].row+a;
                 attackerC=program_animals[i].column+b;
                 attacker_index=isAnyAnimal(attackerR,attackerC,'p');
                 defender_index=i;
+                defenderR=program_animals[i].row;
+                defenderC=program_animals[i].column;
             }
         }
     }
@@ -26,6 +30,8 @@ for(a=-1;a<=1;a++){
 program_animals[attacker_index].energy=program_animals[attacker_index].energy-(program_animals[attacker_index].single_move_energy*3)
 if(program_animals[attacker_index].energy>program_animals[defender_index].energy) winner='a';
 else winner='d';
+if(winner=='d') world[attackerR][attackerC]='.';
+else world[defenderR][defenderC]='.';
 //lose() baraye heyvuni ke mord
 }
 int giveEnergy(){
