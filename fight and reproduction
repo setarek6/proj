@@ -85,7 +85,8 @@ else{
 return(-1);
 }
 void reproduction(char mode){ 
-int i,j,r,c,sw=0,a,b,index,kind; //sw byad avale tabe sefr beshe
+int i,j,r,c,sw=0,a,b,index; //sw byad avale tabe sefr beshe
+char kind;
 if(random(0,1)==0)  return();
 if(mode=='u'){
 if(user_animals[i].energy<user_animals[i].reproduction_energy) return();
