@@ -120,6 +120,7 @@ k++;
 user_animals[user_animals_index].coordinate.row=r;
 user_animals[user_animals_index].coordinate.column=c;
 user_animal_index++;
+world[r][c]=kind;
 }
 }
 else{ 
@@ -155,6 +156,7 @@ k++;
 program_animals[program_animals_index].coordinate.row=r;
 program_animals[program_animals_index].coordinate.column=c;
 program_animals_index++;
+world[r][c]=kind;
 }
 }
 }
