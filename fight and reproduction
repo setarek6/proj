@@ -85,7 +85,7 @@ else{
 return(-1);
 }
 void reproduction(char mode){ 
-int i,j,r,c,sw=0,a,b,index; //sw byad avale tabe sefr beshe
+int i,j,r,c,sw=0,a,b,index,xR,yR; //sw byad avale tabe sefr beshe
 char kind;
 if(random(0,1)==0)  return();
 if(mode=='u'){
@@ -114,8 +114,12 @@ user_animals[user_animals_index].attack_energy=random(20,500);
 user_animals[user_animals_index].defense_energy=random(20,500);
 do{
 int k=1; 
-r=x+random(-k,k);
-c=y+random(-k,k);
+do{
+xR=random(-k,k);  
+yR=random(-k,k); 
+}while(xR!=-k||yR!=k||xR!=k||yR!=-k);
+r=x+xR;
+c=y+yR;
 k++;
 }while(world[r][c]!='.');
 user_animals[user_animals_index].coordinate.row=r;
@@ -150,8 +154,12 @@ program_animals[program_animals_index].attack_energy=random(20,500);
 program_animals[program_animals_index].defense_energy=random(20,500);
 do{
 int k=1; 
-r=x+random(-k,k);
-c=y+random(-k,k);
+do{
+xR=random(-k,k);  
+yR=random(-k,k); 
+}while(xR!=-k||yR!=k||xR!=k||yR!=-k);
+r=x+xR;
+c=y+yR;
 k++;
 }while(world[r][c]!='.');
 program_animals[program_animals_index].coordinate.row=r;
