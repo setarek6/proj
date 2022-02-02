@@ -170,3 +170,14 @@ world[r][c]=kind;
 }
 }
 //////tuye main baad az harkate har heyvun
+
+#######################################################################################
+int warning(char move){
+x=user_animals[i].animal_coordinate.row;
+y=user_animals[i].animal_coordinate.column;   
+if(move=='5'||(move=='1' &&(x+1>=side||y-1<0))||(move=='2'&& x+1>=side)||(move=='3'&&(x+1>=side||y+1>=side))||(move=='4'&&y-1<0)||(move=='6'&&y+1>=side)|| (move=='7'&&(x-1<0 || y-1<0))||if(move=='8'&& x-1<0)||(move=='9'&&(x-1<0||y+1>=side))){
+printf("you can't choose this move, choose again:");
+return(0);
+}
+else return(1);
+}
