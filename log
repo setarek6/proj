@@ -11,7 +11,7 @@ void LogGame(FILE * gamelog, char mode, int round_number, char animal, int anima
     else if(mode=='g')
         fprintf(gamelog,"An animal of type %c gave its energy to another animal of its kind");
     else if (mode=='b')
-    fprintf(gamelog,"f types %c & %c fought and type %c won",animal,animal2,animal2);
+    fprintf(gamelog,"Two animals of types %c & %c fought and type %c won",animal,animal2,animal2);
     else{
         if(whos_animal == 'p'){
             if(mode == 'f'){
